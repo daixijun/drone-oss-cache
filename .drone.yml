@@ -6,7 +6,7 @@ steps:
   - name: vet
     image: golang:1.12
     commands:
-      - go vet ./..
+      - go vet ./...
   - name: build-and-push-image
     image: plugins/docker
     settings:

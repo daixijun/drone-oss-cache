@@ -1,0 +1,18 @@
+---
+kind: pipeline
+name: default
+
+steps:
+  - name: vet
+    image: golang:1.12
+    commands:
+      - go vet ./..
+  - name: build-and-push-image
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo: daixijun1990/drone-oss-cache
+      auto_tag: true

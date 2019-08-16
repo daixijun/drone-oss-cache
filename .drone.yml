@@ -3,10 +3,16 @@ kind: pipeline
 name: default
 
 steps:
-  - name: vet
+  - name: build
     image: golang:1.12
+    environment:
+      CGO_ENABLE: "0"
+      GOOS: linux
+      GOARCH: amd64
+      GO11MODULE: on
     commands:
       - go vet ./...
+      - go build -ldflags "-w -s" -o drone-oss-cache .
   - name: build-and-push-image
     image: plugins/docker
     settings:

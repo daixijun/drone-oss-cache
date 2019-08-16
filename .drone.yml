@@ -6,7 +6,7 @@ steps:
   - name: build
     image: golang:1.12
     environment:
-      CGO_ENABLE: "0"
+      CGO_ENABLED: "0"
       GOOS: linux
       GOARCH: amd64
       GO11MODULE: on

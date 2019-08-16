@@ -36,19 +36,18 @@ func (s *ossStorage) Get(p string, dst io.Writer) error {
 	logrus.Infof("Retrieving file in %s at %s", s.bucket.BucketName, p)
 	reader, err := s.bucket.GetObject(p)
 	if err != nil {
-		logrus.Errorf("Download file failed: %s", err)
 		return err
 	}
 	defer func() {
 		_ = reader.Close()
 	}()
 
-	bodyBytes, err := ioutil.ReadAll(reader)
+	body, err := ioutil.ReadAll(reader)
 	if err != nil {
 		return err
 	}
 
-	if _, err := dst.Write(bodyBytes); err != nil {
+	if _, err := dst.Write(body); err != nil {
 		return err
 	}
 	logrus.Infof("Downloaded cache file to server succeeded.")

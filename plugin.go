@@ -43,7 +43,6 @@ func (p *Plugin) Exec() error {
 
 	path := filepath.Join(p.Path, p.FileName)
 	if p.Mode == RebuildMode {
-		logrus.Infof("Rebuilding cache at %s", path)
 		err = c.Rebuild(p.Mount, path)
 
 		if err == nil {
